@@ -1,11 +1,5 @@
 <template>
   <div class="container">
-    <!-- <div class="columns is-desktop">
-      <div class="column">1</div>
-      <div class="column">2</div>
-      <div class="column">3</div>
-      <div class="column">4</div>
-    </div> -->
     <div class="columns is-desktop">
       <div class="column is-4">
         <bill-list :orders="orders" @orderSelect="orderSelect"></bill-list>
@@ -15,7 +9,7 @@
         <bill-detail :selected="selected" :orderKey="orderKey" @purchase="purchase"></bill-detail>
       </div>
     </div>
-  </div> 
+  </div>
 </template>
 <script>
 import db from '../firebase.conf'
@@ -39,11 +33,11 @@ export default {
   },
   methods: {
     purchase () {
-      this.$firebaseRefs.nomkafe.child('order').child(this.orderKey).update({status: 'PURCHASE'})
+      this.$firebaseRefs.nomkafe.child('order').child(this.orderKey).update({ status: 'PURCHASE' })
       this.selected = {}
       this.orderKey = ''
     },
-    orderSelect ({selected, orderKey}) {
+    orderSelect ({ selected, orderKey }) {
       this.selected = selected
       this.orderKey = orderKey
     }

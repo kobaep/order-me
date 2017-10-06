@@ -1,15 +1,19 @@
 <template>
   <div class="box is-fullheight">
-    <div class="column" v-for="(value, key) in items" :key="key">
-      <img src="../assets/milke_shake.jpeg" alt="" @click="addOrder(value)">
-      <figure>{{value.name}}: {{ value.price }}</figure>
+    <div class="columns" v-for="( item1, index1 ) in tmpItem" :key="index1">
+      <div class="column is-4" v-for="(value, key) in item1" :key="key">
+        <div class="box">
+          <img src="../assets/milke_shake.jpeg" alt="" @click="addOrder(value)">
+          <figure>{{value.name}}: {{value.price}}</figure>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['items'],
+  props: ['items', 'tmpItem'],
   name: 'item-list',
   data () {
     return {

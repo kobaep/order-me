@@ -5,7 +5,7 @@
         <order-list :orders="orders" :price="price" @increment="increment" @decrement="decrement" @sendOrder="sendOrder" ></order-list>
       </div>
       <div class="column">
-        <item-list @orders="addOrder" :items="items"></item-list>
+        <item-list @orders="addOrder" :items="items" :tmpItem="tmpItem"></item-list>
       </div>
     </div>
 	</div>
@@ -30,7 +30,8 @@ export default {
       msg: 'Index',
       orders: {},
       price: 0,
-      items: {}
+      items: {},
+      tmpItem: []
     }
   },
   methods: {
@@ -75,6 +76,23 @@ export default {
   mounted () {
     this.$firebaseRefs.nomkafe.child('items').on('value', snapshot => {
       this.items = snapshot.val()
+      const metrix = 3
+      let counter = 1
+      let obj = {}
+      for (let key in this.items) {
+        if (counter <= metrix) {
+          obj[key] = this.items[key]
+          counter++
+        } else {
+          this.tmpItem.push(obj)
+          obj = {}
+
+          counter = 1
+          obj[key] = this.items[key]
+          counter++
+        }
+      }
+      this.tmpItem.push(obj)
     })
   }
 }

@@ -1,5 +1,5 @@
 <template>
-	<div class="box">
+	<div class="box is-fullheight">
     <p class="panel-heading" :style="havePrice" @click="confirmOrder">
       <label for="">{{ price }} : &#3647; </label>
     </p>
